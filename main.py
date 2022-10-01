@@ -17,8 +17,8 @@ logging.basicConfig(level=logging.INFO)
 
 bot = Client(
     'bot',
-    api_id= 13221029, #get it from https://my.telegram.org/auth
-    api_hash="8ee3c5bfe718a463900933d8f6ef0158", #get it from https://my.telegram.org/auth
+    api_id= 13532780, #get it from https://my.telegram.org/auth
+    api_hash="f73ffaec3acf05270cde1dc63c561ef0", #get it from https://my.telegram.org/auth
     bot_token="5650840926:AAEl1dL99zPqUFfrvl_DFjnBzoltd4mO9o4", #get it from @Botfather
     plugins=dict(root="plugins"),
     parse_mode="html")
