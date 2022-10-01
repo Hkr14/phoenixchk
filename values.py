@@ -45,7 +45,7 @@ import json
 
 mongourl = 'mongodb+srv://root:Sarcehkr@cesar0728.aawvjxo.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
 client = pymongo.MongoClient(mongourl,serverSelectionTimeoutMS=5000)
-maindb = client.bot['Cesar0728']
+maindb = client.bot['main']
 
 antidb = redis.Redis(host='redis-14296.c8.us-east-1-4.ec2.cloud.redislabs.com', port="14296", password='Dh69dUqGtDR9ZNKzamVFq0H0h0JcXEjT')
 
