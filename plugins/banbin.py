@@ -20,20 +20,23 @@ import os
 from values import *
 from pyrogram import (
     Client,
-    filters)
-
-@Client.on_message(filters.command('addgp',prefixes=['.','/','!'],case_sensitive=False) & filters.text)
-async def bin(Client, message):
+    filters
+)
+import json
+@Client.on_message(filters.command('addbin',prefixes=['.','/','!'],case_sensitive=False) & filters.text)
+async def banbin(Client, message):
     try:
         if str(message.from_user.id) + "\n" in admins:
-            file = open('files/groups.txt', 'r')
-            if str(message.chat.id) + "\n" not in file.readlines():
-                file = open('files/groups.txt', 'a+') 
-                file.write(str(message.chat.id) + "\n")
+            file = open('files/bannedbin.txt', 'r') 
+            input = lista(message.text)
+            bin = input[:6]
+            if str(bin) + "\n" not in file.readlines():
+                file = open('files/bannedbin.txt', 'a+') 
+                file.write(str(bin) + "\n")
                 file.close()
-                await message.reply_text(text="<b>ADDED</b>",reply_to_message_id=message.message_id)
+                await message.reply_text(text="<b>BANNED</b>",reply_to_message_id=message.message_id)
             else:
-                await message.reply_text(text="<b>ALREADY ADDED</b>",reply_to_message_id=message.message_id)
+                await message.reply_text(text="<b>ALREADY BANNED</b>",reply_to_message_id=message.message_id)
     except IndexError as e:
         print(e)
     except Exception as e:
